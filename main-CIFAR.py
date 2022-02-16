@@ -8,13 +8,11 @@ from tqdm import tqdm              # to track progress of loops
 from util_CIFAR import DisplayUtils
 DATA_DIR = './tensorflow-datasets/'
 # Gather the data
-train = tfds.load(
-    'cifar100', split='train[:90%]', data_dir=DATA_DIR, shuffle_files=True)
-
-# After the training loop, run another loop over this data without the gradient updates to calculate accuracy
-validation = tfds.load('cifar100', split='train[-10%:]', data_dir=DATA_DIR)
+# this loads a dict with the datasets
+ds = tfds.load('cifar100', shuffle_files=True, data_dir=DATA_DIR)
+train_ds = ds['train'].shuffle(1024).batch(32)
 # Looping through the iterator, each batch is a dict
-for batch in train:
+for batch in train_ds:
     print("data shape:", batch['image'].shape)
     print("label:", batch['label'])
     break

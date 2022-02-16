@@ -9,8 +9,8 @@ from tqdm import tqdm              # to track progress of loops
 
 class DisplayUtils:
     def visualize_batch(self, batch):
-        # visualize some of the data
+        # visualize some of the data, pick randomly every time this cell is run
         idx = np.random.randint(batch['image'].shape[0])
-        print("idx is: ", idx)
+        print("An image looks like this:")
         imgplot = plt.imshow(batch['image'][idx])
         plt.show()
