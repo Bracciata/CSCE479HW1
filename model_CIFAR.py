@@ -24,7 +24,7 @@ class ModelOne:
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
 
-    def train(self, ds):
+    def initialize(self, ds):
         # Run some data through the network to initialize it
         for batch in ds:
             # data is uint8 by default, so we have to cast it
