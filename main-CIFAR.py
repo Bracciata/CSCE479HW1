@@ -5,16 +5,16 @@ import tensorflow as tf            # to specify and run computation graphs
 import tensorflow_datasets as tfds  # to load training data
 import matplotlib.pyplot as plt    # to visualize data and draw plots
 from tqdm import tqdm              # to track progress of loops
-from util_CIFAR import DisplayUtils
+from util_CIFAR import DisplayUtils, DataUtils
+from model_CIFAR import ModelOne
 DATA_DIR = './tensorflow-datasets/'
 # Gather the data
 # this loads a dict with the datasets
 ds = tfds.load('cifar100', shuffle_files=True, data_dir=DATA_DIR)
 train_ds = ds['train'].shuffle(1024).batch(32)
-# Looping through the iterator, each batch is a dict
-for batch in train_ds:
-    print("data shape:", batch['image'].shape)
-    print("label:", batch['label'])
-    break
+data_displayer = DataUtils()
+last_batch = data_displayer.describe_data(train_ds)
 displayer = DisplayUtils()
-displayer.visualize_batch(batch)
+displayer.visualize_batch(last_batch)
+model_one = ModelOne()
+model_one.train(train_ds)

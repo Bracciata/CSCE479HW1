@@ -14,3 +14,13 @@ class DisplayUtils:
         print("An image looks like this:")
         imgplot = plt.imshow(batch['image'][idx])
         plt.show()
+
+
+class DataUtils:
+    def describe_data(self, ds):
+        # Looping through the iterator, each batch is a dict
+        for batch in ds:
+            print("data shape:", batch['image'].shape)
+            print("label:", batch['label'])
+            break
+        return batch
