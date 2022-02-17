@@ -42,7 +42,7 @@ class ModelOne:
                 with tf.GradientTape() as tape:
                     # run network
                     x = tf.reshape(
-                        tf.cast(batch['image'], tf.float32), [-1, 784])
+                        tf.cast(batch['image'], tf.float32), [-1, 1024])
                     labels = batch['label']
                     # Convert to one hot
                     labels = tf.keras.utils.to_categorical(labels)
@@ -58,7 +58,6 @@ class ModelOne:
                     loss, self.conv_classifier.trainable_variables)
                 optimizer.apply_gradients(
                     zip(grads, self.conv_classifier.trainable_variables))
-
                 # calculate accuracy
                 predictions = tf.argmax(logits, axis=1)
                 accuracy = tf.reduce_mean(
