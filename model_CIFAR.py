@@ -20,7 +20,7 @@ class ModelOne:
             filters=256, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_4')
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
-        output = tf.keras.layers.Dense(10)
+        output = tf.keras.layers.Dense(100, activation="softmax")
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
 
@@ -41,12 +41,10 @@ class ModelOne:
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = tf.reshape(
-                        tf.cast(batch['image'], tf.float32), [-1, 1024])
+                    x = batch['image']
                     labels = batch['label']
                     # Convert to one hot
-                    labels = tf.keras.utils.to_categorical(labels)
-                    print(labels)
+                    #labels = tf.keras.utils.to_categorical(labels)
                     logits = self.conv_classifier(x)
                     # calculate loss
                     loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
@@ -61,7 +59,7 @@ class ModelOne:
                 # calculate accuracy
                 predictions = tf.argmax(logits, axis=1)
                 accuracy = tf.reduce_mean(
-                    tf.cast(tf.equal(predictions, labels), tf.float32))
+                    tf.cast(tf.equal(predictions, labels[0]), tf.float32))
                 accuracy_values.append(accuracy)
 
         print(self.conv_classifier.summary())
