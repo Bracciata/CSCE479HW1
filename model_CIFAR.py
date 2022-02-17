@@ -44,8 +44,10 @@ class ModelOne:
                     x = tf.reshape(
                         tf.cast(batch['image'], tf.float32), [-1, 784])
                     labels = batch['label']
+                    # Convert to one hot
+                    labels = tf.keras.utils.to_categorical(labels)
+                    print(labels)
                     logits = self.conv_classifier(x)
-
                     # calculate loss
                     loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
                         logits=logits, labels=labels)
