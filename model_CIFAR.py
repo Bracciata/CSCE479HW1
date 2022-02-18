@@ -10,8 +10,9 @@ from util_CIFAR import EarlyStopping
 
 class ModelOne:
     def __init__(self):
+        # Adding Regularlizer
         hidden_1 = tf.keras.layers.Conv2D(
-            filters=32, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_1')
+            filters=32, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_1', kernel_regularizer=tf.keras.regularizers.L2(0.01))
         hidden_2 = tf.keras.layers.Conv2D(
             filters=64, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_2')
         pool_1 = tf.keras.layers.MaxPool2D(padding='same')
@@ -34,6 +35,7 @@ class ModelOne:
             break
 
     def train(self, ds):
+        # Optimizer chosen
         optimizer = tf.keras.optimizers.Adam()
 
         loss_values = []
@@ -72,10 +74,11 @@ class ModelOne:
 
 class ModelTwo:
     def __init__(self):
+        # Added two regularizers
         hidden_1 = tf.keras.layers.Conv2D(
-            filters=32, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_1')
+            filters=32, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_1', kernel_regularizer=tf.keras.regularizers.L2(0.01))
         hidden_2 = tf.keras.layers.Conv2D(
-            filters=64, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_2')
+            filters=64, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_2', kernel_regularizer=tf.keras.regularizers.L2(0.01))
         hidden_3 = tf.keras.layers.Conv2D(
             filters=128, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_2')
         pool_1 = tf.keras.layers.MaxPool2D(padding='same')
