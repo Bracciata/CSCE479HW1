@@ -6,7 +6,7 @@ import tensorflow_datasets as tfds  # to load training data
 import matplotlib.pyplot as plt    # to visualize data and draw plots
 from tqdm import tqdm              # to track progress of loops
 from util_CIFAR import DisplayUtils, DataUtils
-from model_CIFAR import ModelOne
+from model_CIFAR import ModelOne, ModelTwo
 DATA_DIR = './tensorflow-datasets/'
 # Gather the data
 # this loads a dict with the datasets
@@ -19,3 +19,6 @@ train_ds = ds['train'].shuffle(1024).batch(32)
 model_one = ModelOne()
 model_one.initialize(train_ds)
 model_one.train(train_ds)
+model_two = ModelTwo()
+model_two.initialize(train_ds)
+model_two.train(train_ds)
