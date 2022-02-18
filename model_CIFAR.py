@@ -23,7 +23,7 @@ class ModelOne:
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
-        self.early_stopper = EarlyStopping()
+        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-6)
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
 
@@ -95,7 +95,7 @@ class ModelTwo:
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
-        self.early_stopper = EarlyStopping()
+        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-6)
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
 
