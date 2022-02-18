@@ -64,7 +64,6 @@ class ModelOne:
                     tf.cast(tf.equal(predictions, labels[0]), tf.float32))
                 accuracy_values.append(accuracy)
                 if self.early_stopper.check(tf.math.reduce_mean(loss)):
-                    print('ayy')
                     print(self.early_stopper)
 
                     break
