@@ -45,7 +45,7 @@ class ModelOne:
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = batch['image']
+                    x = tf.cast(batch['image'], tf.float32)
                     labels = batch['label']
                     # Convert to one hot
                     # labels = tf.keras.utils.to_categorical(labels)
@@ -63,7 +63,7 @@ class ModelOne:
                 # calculate accuracy
                 predictions = tf.argmax(logits, axis=1)
                 accuracy = tf.reduce_mean(
-                    tf.cast(tf.equal(predictions, labels[0]), tf.float32))
+                    tf.cast(tf.equal(predictions, labels), tf.float32))
                 accuracy_values.append(accuracy)
                 if self.early_stopper.check(tf.math.reduce_mean(loss)):
                     print(self.early_stopper)
@@ -116,7 +116,7 @@ class ModelTwo:
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = batch['image']
+                    x = tf.cast(batch['image'], tf.float32)
                     labels = batch['label']
                     # Convert to one hot
                     # labels = tf.keras.utils.to_categorical(labels)
@@ -134,7 +134,7 @@ class ModelTwo:
                 # calculate accuracy
                 predictions = tf.argmax(logits, axis=1)
                 accuracy = tf.reduce_mean(
-                    tf.cast(tf.equal(predictions, labels[0]), tf.float32))
+                    tf.cast(tf.equal(predictions, labels), tf.float32))
                 accuracy_values.append(accuracy)
                 if self.early_stopper.check(np.mean(loss)):
                     print(self.early_stopper)
