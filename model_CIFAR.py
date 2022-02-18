@@ -10,7 +10,7 @@ from util_CIFAR import EarlyStopping
 
 class ModelOne:
     def __init__(self):
-        # Adding Regularlizer
+        # Adding Regularlizer based on official Tensorflow Docs.
         hidden_1 = tf.keras.layers.Conv2D(
             filters=32, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_1', kernel_regularizer=tf.keras.regularizers.L2(0.01))
         hidden_2 = tf.keras.layers.Conv2D(
@@ -48,7 +48,7 @@ class ModelOne:
                     x = batch['image']
                     labels = batch['label']
                     # Convert to one hot
-                    #labels = tf.keras.utils.to_categorical(labels)
+                    # labels = tf.keras.utils.to_categorical(labels)
                     logits = self.conv_classifier(x)
                     # calculate loss
                     loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
@@ -70,6 +70,12 @@ class ModelOne:
 
                     break
         print(self.conv_classifier.summary())
+        print("Accuracy:", np.mean(accuracy_values))
+        # plot per-datum loss
+        loss_values = np.concatenate(loss_values)
+        plt.hist(loss_values, density=True, bins=30)
+        plt.show()
+        print(tf.math.confusion_matrix(labels, predictions))
 
 
 class ModelTwo:
@@ -113,7 +119,7 @@ class ModelTwo:
                     x = batch['image']
                     labels = batch['label']
                     # Convert to one hot
-                    #labels = tf.keras.utils.to_categorical(labels)
+                    # labels = tf.keras.utils.to_categorical(labels)
                     logits = self.conv_classifier(x)
                     # calculate loss
                     loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
@@ -130,8 +136,14 @@ class ModelTwo:
                 accuracy = tf.reduce_mean(
                     tf.cast(tf.equal(predictions, labels[0]), tf.float32))
                 accuracy_values.append(accuracy)
-                if self.early_stopper.check(tf.math.reduce_mean(loss)):
+                if self.early_stopper.check(np.mean(loss)):
                     print(self.early_stopper)
                     break
 
         print(self.conv_classifier.summary())
+        print("Accuracy:", np.mean(accuracy_values))
+        # plot per-datum loss
+        loss_values = np.concatenate(loss_values)
+        plt.hist(loss_values, density=True, bins=30)
+        plt.show()
+        print(tf.math.confusion_matrix(labels, predictions))
