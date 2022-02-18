@@ -23,7 +23,7 @@ class ModelOne:
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
-        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-6)
+        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-8)
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
 
@@ -41,7 +41,7 @@ class ModelOne:
         loss_values = []
         accuracy_values = []
         # Loop through one epoch of data
-        for epoch in range(200):
+        for epoch in range(1):
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
@@ -95,7 +95,7 @@ class ModelTwo:
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
-        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-6)
+        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-8)
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
 
@@ -112,7 +112,7 @@ class ModelTwo:
         loss_values = []
         accuracy_values = []
         # Loop through one epoch of data
-        for epoch in range(200):
+        for epoch in range(1):
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
