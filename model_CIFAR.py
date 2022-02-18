@@ -41,11 +41,11 @@ class ModelOne:
         loss_values = []
         accuracy_values = []
         # Loop through one epoch of data
-        for epoch in range(1):
+        for epoch in range(200):
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = tf.cast(batch['image'], tf.float32)
+                    x = tf.cast(batch['image'], tf.float32) / 255
                     labels = batch['label']
                     # Convert to one hot
                     # labels = tf.keras.utils.to_categorical(labels)
@@ -112,11 +112,11 @@ class ModelTwo:
         loss_values = []
         accuracy_values = []
         # Loop through one epoch of data
-        for epoch in range(1):
+        for epoch in range(200):
             for batch in tqdm(ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = tf.cast(batch['image'], tf.float32)
+                    x = tf.cast(batch['image'], tf.float32) / 255
                     labels = batch['label']
                     # Convert to one hot
                     # labels = tf.keras.utils.to_categorical(labels)
