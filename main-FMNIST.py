@@ -12,9 +12,9 @@ from model_FMNIST import ModelOne
 DATA_DIR = './tensorflow-datasets/'
 
 train = tfds.load(
-    'fashion_mnist', split='train[:90%]', data_dir=DATA_DIR).shuffle(1024).batch(16)
+    'fashion_mnist', split='train[:90%]', data_dir=DATA_DIR).shuffle(1024).batch(32)
 validation = tfds.load(
-    'fashion_mnist', split='train[-10%:]', data_dir=DATA_DIR).shuffle(1024).batch(16)
+    'fashion_mnist', split='train[-10%:]', data_dir=DATA_DIR).shuffle(1024).batch(32)
 
 data_displayer = DataUtils()
 last_batch = data_displayer.describe_data(train)
