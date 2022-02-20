@@ -65,10 +65,10 @@ class ModelOne:
                 accuracy = tf.reduce_mean(
                     tf.cast(tf.equal(predictions, labels), tf.float32))
                 accuracy_values.append(accuracy)
-                if self.early_stopper.check(tf.math.reduce_mean(loss)):
-                    print(self.early_stopper)
+                # if self.early_stopper.check(tf.math.reduce_mean(loss)):
+                #    print(self.early_stopper)
 
-                    break
+                #    break
         print(self.conv_classifier.summary())
         print("Accuracy:", np.mean(accuracy_values))
         # plot per-datum loss
@@ -136,9 +136,9 @@ class ModelTwo:
                 accuracy = tf.reduce_mean(
                     tf.cast(tf.equal(predictions, labels), tf.float32))
                 accuracy_values.append(accuracy)
-                if self.early_stopper.check(np.mean(loss)):
-                    print(self.early_stopper)
-                    break
+                # if self.early_stopper.check(np.mean(loss)):
+                #    print(self.early_stopper)
+                #    break
 
         print(self.conv_classifier.summary())
         print("Accuracy:", np.mean(accuracy_values))
