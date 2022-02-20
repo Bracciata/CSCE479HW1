@@ -86,12 +86,12 @@ class ModelTwo:
         hidden_2 = tf.keras.layers.Conv2D(
             filters=64, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_2', kernel_regularizer=tf.keras.regularizers.L2(0.01))
         hidden_3 = tf.keras.layers.Conv2D(
-            filters=128, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_2')
+            filters=128, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_3')
         pool_1 = tf.keras.layers.MaxPool2D(padding='same')
         hidden_3 = tf.keras.layers.Conv2D(
-            filters=256, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_3')
+            filters=256, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_4')
         hidden_4 = tf.keras.layers.Conv2D(
-            filters=512, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_4')
+            filters=512, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_5')
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
