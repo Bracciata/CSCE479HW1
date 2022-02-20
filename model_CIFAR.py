@@ -88,16 +88,16 @@ class ModelTwo:
         hidden_3 = tf.keras.layers.Conv2D(
             filters=128, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_3')
         pool_1 = tf.keras.layers.MaxPool2D(padding='same')
-        hidden_3 = tf.keras.layers.Conv2D(
-            filters=256, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_4')
         hidden_4 = tf.keras.layers.Conv2D(
+            filters=256, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_4')
+        hidden_5 = tf.keras.layers.Conv2D(
             filters=512, kernel_size=3, padding='same', activation=tf.nn.relu, name='hidden_5')
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
         self.early_stopper = EarlyStopping(patience=20, epsilon=1e-8)
         self.conv_classifier = tf.keras.Sequential(
-            [hidden_1, hidden_2, pool_1, hidden_3, hidden_4, pool_2, flatten, output])
+            [hidden_1, hidden_2, hidden_3, pool_1, hidden_4, hidden_5, pool_2, flatten, output])
 
     def initialize(self, ds):
         # Run some data through the network to initialize it
