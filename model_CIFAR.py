@@ -65,10 +65,10 @@ class ModelOne:
                 accuracy = tf.reduce_mean(
                     tf.cast(tf.equal(predictions, labels), tf.float32))
                 accuracy_values.append(accuracy)
-                # if self.early_stopper.check(tf.math.reduce_mean(loss)):
-                #    print(self.early_stopper)
+                if self.early_stopper.check(tf.math.reduce_mean(loss)):
+                    print(self.early_stopper)
 
-                #    break
+                    break
         print(self.conv_classifier.summary())
         print("Accuracy:", np.mean(accuracy_values))
         # plot per-datum loss
@@ -95,7 +95,7 @@ class ModelTwo:
         pool_2 = tf.keras.layers.MaxPool2D(padding='same')
         flatten = tf.keras.layers.Flatten()
         output = tf.keras.layers.Dense(100, activation="softmax")
-        self.early_stopper = EarlyStopping(patience=30, epsilon=1e-8)
+        self.early_stopper = EarlyStopping(patience=20, epsilon=1e-8)
         self.conv_classifier = tf.keras.Sequential(
             [hidden_1, hidden_2, hidden_3, pool_1, hidden_4, hidden_5, pool_2, flatten, output])
 
@@ -136,9 +136,9 @@ class ModelTwo:
                 accuracy = tf.reduce_mean(
                     tf.cast(tf.equal(predictions, labels), tf.float32))
                 accuracy_values.append(accuracy)
-                # if self.early_stopper.check(np.mean(loss)):
-                #    print(self.early_stopper)
-                #    break
+                if self.early_stopper.check(np.mean(loss)):
+                    print(self.early_stopper)
+                    break
 
         print(self.conv_classifier.summary())
         print("Accuracy:", np.mean(accuracy_values))
