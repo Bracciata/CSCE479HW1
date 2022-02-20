@@ -65,8 +65,8 @@ class ModelOne:
         # Adding Regularlizer based on official Tensorflow Docs.
         self.model = tf.keras.Sequential()
         self.model.add(tf.keras.layers.Flatten(input_shape=[28, 28]))
-        self.model.add(tf.keras.layers.Dense(90, tf.nn.relu))
-        self.model.add(tf.keras.layers.Dense(50, tf.nn.relu))
+        self.model.add(tf.keras.layers.Dense(300, tf.nn.relu))
+        self.model.add(tf.keras.layers.Dense(99, tf.nn.relu))
         self.model.add(tf.keras.layers.Dense(10, tf.nn.softmax))
 
     def initialize(self, train_ds):
