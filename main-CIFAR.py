@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-import numpy as np                 # to use numpy arrays
+import numpy as np                 # to use numpy arrays this is my change
 import tensorflow as tf            # to specify and run computation graphs
 import tensorflow_datasets as tfds  # to load training data
 import matplotlib.pyplot as plt    # to visualize data and draw plots
@@ -22,3 +22,6 @@ model_one.train(train_ds)
 model_two = ModelTwo()
 model_two.initialize(train_ds)
 model_two.train(train_ds)
+
+
+
