@@ -90,8 +90,7 @@ class ModelOne:
             for batch in tqdm(train_ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = tf.reshape(
-                        tf.cast(batch['image'], tf.float32), [-1, 784])
+                    x = tf.cast(batch['image'], tf.float32)
                     x = x / 255.0
                     labels = batch['label']
                     logits = self.model(x)
@@ -124,8 +123,7 @@ class ModelOne:
             for batch in tqdm(val_ds):
                 with tf.GradientTape() as tape:
                     # run network
-                    x = tf.reshape(
-                        tf.cast(batch['image'], tf.float32), [-1, 784])
+                    x = tf.cast(batch['image'], tf.float32)
                     x = x / 255.0
                     labels = batch['label']
                     logits = self.model(x)
